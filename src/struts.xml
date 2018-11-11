@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- <constant name="struts.objectFactory" value="spring"></constant> -->
+	<package name="bos" namespace="" extends="struts-default">
+		
+		<interceptors>
+			<interceptor name="myInterceptor" class="cn.ldm.interceptor.Interceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="myInterceptor">
+					<param name="excludeMethods">login</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+	
+		<global-results>
+			<result name="toLogin">/jsp/login.jsp</result>
+			<result name="unauthorized">/jsp/error.jsp</result>
+			<result name="error1">/jsp/login.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="unauthorized" 
+							exception="org.apache.shiro.authz.UnauthorizedException">
+			</exception-mapping>
+			<exception-mapping result="error1" 
+							exception="cn.ldm.exception.Exception01">
+			</exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="page_*_*">
+			<result>/jsp/page_{1}_{2}.jsp</result>
+		</action>
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="toMenu">/jsp/menu.jsp</result>
+			<result name="toError">/jsp/error.jsp</result>
+			<result name="toText">/jsp/text.jsp</result>
+		</action>
+		
+		<action name="staffAction_*" class="staffAction" method="{1}">
+			<result name="toStaff">/jsp/base/staff.jsp</result>
+		</action>
+		<action name="regionAction_*" class="regionAction" method="{1}">
+		</action>
+		<action name="subareaAction_*" class="subareaAction" method="{1}">
+			<result name="toList">/jsp/base/subarea.jsp</result>
+			<result name="toSubarea">/jsp/base/subarea.jsp</result>
+		</action>
+		<action name="decidedAction_*" class="decidedAction" method="{1}">
+			<result name="toList">/jsp/base/subarea.jsp</result>
+		</action>
+		<action name="crmAction_*" class="crmAction" method="{1}">
+			<result name="toList">/jsp/login.jsp</result>
+		</action>
+		<action name="noticebillAction_*" class="noticebillAction" method="{1}">
+			<result name="toNoticebill">/jsp/qupai/noticebill_add.jsp</result>
+		</action>
+		
+		<action name="workbillAction_*" class="workbillAction" method="{1}">
+		</action>
+		
+		<action name="functionAction_*" class="functionAction" method="{1}">
+		</action>
+		<action name="roleAction_*" class="roleAction" method="{1}">
+		</action>
+	</package>
+</struts>

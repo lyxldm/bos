@@ -1,0 +1,5 @@
+[
+		{ "id":"1001", "pId":"0", "name":"角色管理", "page":"/jsp/admin/role.jsp"},
+		{ "id":"1002", "pId":"0", "name":"功能权限管理", "page":"/jsp/admin/function.jsp"},
+		{ "id":"1003", "pId":"0", "name":"用户管理", "page":"/jsp/admin/userlist.jsp"}
+]
